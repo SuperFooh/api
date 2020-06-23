@@ -56,12 +56,15 @@ $ cd C:
 $ mkdir -p data/db
 ```
 
-5. Start mongo: run de binary where ever it was placed in the installation steps followed:
+5. Start mongo: run de binary where ever it was placed in the installation steps followed previously and pass the root directory where all db-related information is going to be placed. For our purposes, we are going to manage our db root directory inside **data/** with the name of **cluster**
 
 ```bash
-"C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="c:\data\db"
+"C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="c:\data\cluster"
 ```
 
 > For creating a shortcut to the **path** environment variable: go to *Control Panel\System and Security\System* -> **Advanced system settings** -> **Environment Variables** and add a new entry for the path variable.
 
+**NOTE:** if the daemon doesn't remain listening, it means that we have a missing directory in the **dbpath** attribute we passed to the above script. Being that the case you the CLI should have reported it and immediately prompted for another command.
 
+
+ 
