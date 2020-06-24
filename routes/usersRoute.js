@@ -7,15 +7,14 @@ const authenticateUser = async (req, res, next) => {
     next()
 }
 const loadUser = (req, res, next) => {
-    req.locals.authenticated = true;
     console.log('user was logged');
     next();
-}
+} 
+UsersRouter.use((req, res, next) => { console.log('llegamos a las rutas del usuario'); next() })
+// UsersRouter.use(authenticateUser);
+// UsersRouter.use(loadUser); 
 
-UsersRouter.use(authenticateUser);
-UsersRouter.use(loadUser); 
-
-UsersRouter.get('/')
+UsersRouter.get('/', (req, res) => res.send('ruta de usuarios'))
 UsersRouter.get('/:id');
 UsersRouter.post('/:id', UserController);
 

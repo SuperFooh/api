@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const glob = require('glob')
 
 const UsersRouter = require('./routes/usersRoute');
 const RequestsRouter = require('./routes/requestsRoute')
@@ -24,11 +25,14 @@ app.use((req, res, next) => {
     next();
 })
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('./login' , express.static(path.join(__dirname, 'public')));
 
-// app.use('/', indexRouter);
-app.use('/users', UsersRouter);
-app.use('/requests', RequestsRouter)
+//manejo de enrutamiento primario
+const rootRouter = glob.sync('**/*.js', { cwd: `${__dirname}/routes` })
+    .map(filename => ({ instance : require(`./routes/${filename}`), base : filename.slice(0,filename.indexOf('.') - 5)})) //traemos todas las rutas del directorio routes
+    .filter(item => Object.getPrototypeOf(item.instance) === express.Router) //nos fijamos que todas las rutas esten exportando una instancia de express.Router()
+    .reduce((rootRouter, router) => (rootRouter.use(`/${router.base}`, router.instance)), express.Router())
+app.use(rootRouter)
 
 
 // catch 404 and forward to error handler
@@ -43,7 +47,6 @@ app.use(function (err, req, res, next) {
     res.locals.error = req.app.get('env') === 'development' ? err : {};
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
 });
 
 module.exports = app;
