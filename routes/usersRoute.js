@@ -7,8 +7,9 @@ const authenticateUser = async (req, res, next) => {
     next()
 }
 const loadUser = (req, res, next) => {
+    req.locals.authenticated = true;
     console.log('user was logged');
-    next()
+    next();
 }
 
 UsersRouter.use(authenticateUser);
@@ -17,5 +18,7 @@ UsersRouter.use(loadUser);
 UsersRouter.get('/')
 UsersRouter.get('/:id');
 UsersRouter.post('/:id', UserController);
+
+UsersRouter.post('/:id', ()=> UserController)
 
 module.exports = UsersRouter
