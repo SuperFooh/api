@@ -1,19 +1,35 @@
-const User = require('../models/UserModel')
 const ObjectId = require('mongoose').Types.ObjectId
+const User = require('../models/UserModel')
+require('../services/database/initMongoDB')
 
-const UserController = (req, res, next) => {
+exports.setUser = (req, res, next) => {
+    const { name, nickName, email, passWord } = req.body
+    const user = new User({
+        _id: new ObjectId(),
+        name,
+        nickName,
+        email,
+        passWord,
+    })
+    console.log('user', user);
     
-    const { name, nickName, email, rawPassword } = req.body
-
-    setUser: () => {
-        new User({
-            _id: new ObjectId(),
-            name,
-            nickName,
-            email,
-            passWord,
+    user.save().exec()
+        .then(result => {
+            console.log(result);
+            res.status(201).json({
+                'message': 'User created',
+                'user': result
+            })
         })
-    }
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                error : err
+            })
+        })
 }
 
-module.exports = UserController
+exports.getUser = (req, res, next) => {
+    const { userID } = req.body
+    User.findById()
+}

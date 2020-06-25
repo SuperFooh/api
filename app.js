@@ -4,17 +4,13 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const glob = require('glob')
-
-const UsersRouter = require('./routes/usersRoute');
-const RequestsRouter = require('./routes/requestsRoute')
-
 const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-//manejando CORS
+//manejando CORS --> ver como implementar el middleware instalado como dependencia
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-with, Content-Type, Accept, Authorization');
@@ -24,7 +20,7 @@ app.use((req, res, next) => {
     }
     next();
 })
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use('./login' , express.static(path.join(__dirname, 'public')));
 
 //manejo de enrutamiento primario
