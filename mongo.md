@@ -66,5 +66,8 @@ $ mkdir -p data/db
 
 **NOTE:** if the daemon doesn't remain listening, it means that we have a missing directory in the **dbpath** attribute we passed to the above script. Being that the case you the CLI should have reported it and immediately prompted for another command.
 
+## Initialize mongoDB instance with **mongod** binary
+
+(assuming mongod, is set on environment varibales)
 
  
