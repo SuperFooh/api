@@ -7,6 +7,7 @@
     "test": "tests"
   },
   "scripts": {
+    "prestart": "start mongod --config ./data/mongod.cfg",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
     "prod": "NODE_ENV=production node index.js; console.log(NODE_ENV)"
