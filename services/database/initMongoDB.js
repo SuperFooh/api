@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 mongoose.connect(
     process.env.MONGODB_CONNECTION_STRING
         ? process.env.MONGODB_CONNECTION_STRING
-        : 'mongodb://localhost:27017/myapp'
+        : 'mongodb://localhost:27017/wot'
     , {
         useNewUrlParser: true,
         useUnifiedTopology: true //deprecation fix
@@ -15,7 +15,7 @@ mongoose.connect(
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:')); // enlaza el track de error a la consola (proceso actual)
 db.once('open', () => {
-    console.log('connected'); // si esta todo ok, imprime esto
+    console.log('connected', db.collections); // si esta todo ok, imprime esto
 });
 
 module.exports = db

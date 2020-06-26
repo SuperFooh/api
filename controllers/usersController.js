@@ -13,7 +13,7 @@ exports.setUser = (req, res, next) => {
     })
     console.log('user', user);
     
-    user.save().exec()
+    user.save()
         .then(result => {
             console.log(result);
             res.status(201).json({
@@ -32,4 +32,11 @@ exports.setUser = (req, res, next) => {
 exports.getUser = (req, res, next) => {
     const { userID } = req.body
     User.findById()
+
 }
+
+exports.getAllUsers = (req, res, next) => {
+    const users = User.find()
+    console.log(users);
+    res.send(users)
+} 
