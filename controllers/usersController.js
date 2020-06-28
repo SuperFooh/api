@@ -1,6 +1,6 @@
 const ObjectId = require('mongoose').Types.ObjectId
 const User = require('../models/UserModel')
-require('../services/database/initMongoDB')
+require('../services/initMongoDB')
 
 exports.setUser = (req, res, next) => {
     const { name, nickName, email, passWord } = req.body
@@ -20,13 +20,19 @@ exports.setUser = (req, res, next) => {
                 'message': 'User created',
                 'user': result
             })
+            res.send()
         })
         .catch(err => {
             console.log(err);
             res.status(500).json({
                 error : err
             })
+            res.send()
         })
+}
+
+exports.updateUser = (req,res,next) => {
+    res.send({msg : `${req.userID}`})
 }
 
 exports.getUser = (req, res, next) => {
@@ -36,7 +42,11 @@ exports.getUser = (req, res, next) => {
 }
 
 exports.getAllUsers = (req, res, next) => {
-    const users = User.find()
-    console.log(users);
-    res.send(users)
+    try {
+        // const users = User.find()
+        console.log("llegamos aca");
+        res.json({ "message": "ok" })
+    } catch (error) {
+        next(error)
+    }
 } 

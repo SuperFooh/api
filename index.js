@@ -1,7 +1,7 @@
 require("dotenv").config();
 const server = require('./server.js')
-const mongoDB = require('./services/database/initMongoDB')
+const mongoDB = require('./services/initMongoDB')
 
 const port = process.env.PORT || 2000
 
-server.listen(port, () => console.log(`running ${process.NODE_ENV } web-server on port ${port}`))
+server.listen(port, () => console.log(`running ${process.env.NODE_ENV } web-server on port ${port}`))
