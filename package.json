@@ -31,7 +31,9 @@
     "express": "^4.17.1",
     "glob": "^7.1.6",
     "http-errors": "^1.7.3",
-    "mongoose": "^5.9.19"
+    "mongoose": "^5.9.19",
+    "sequelize": "^6.2.3",
+    "tedious": "^8.3.0"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
