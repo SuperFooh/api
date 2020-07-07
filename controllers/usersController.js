@@ -44,7 +44,6 @@ exports.getUser = (req, res, next) => {
 exports.getAllUsers = (req, res, next) => {
     try {
         // const users = User.find()
-        console.log("llegamos aca");
         res.json({ "message": "ok" })
     } catch (error) {
         next(error)

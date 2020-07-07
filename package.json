@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "prestart": "start mongod --config C:/users/manue/Desktop/Back-End/mongo/init.cfg",
+    "prestart": "start mongod --config C:/users/manue/Desktop/app/mongo/init.cfg",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "env NODE_ENV=dev nodemon index.js",
     "prod": "env NODE_ENV=prod node index.js"
