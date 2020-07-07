@@ -22,7 +22,7 @@ app.use((req, res, next) => {
     next();
 })
 // app.use(cookieParser());
-app.use('./login' , express.static(path.join(__dirname, 'public')));
+app.use('/login' , express.static(path.join(__dirname, 'public')));
 
 //manejo de enrutamiento primario
 const rootRouter = glob.sync('**/*.js', { cwd: `${__dirname}/routes` })
