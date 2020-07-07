@@ -25,7 +25,7 @@ app.use('/login', express.static(path.join(__dirname, 'public')));
 
 //ruta condicional de nuestra app en react, si lo corremos en prod va a servir el bundle estatico, sino a traves del proxy seteado en webpack-dev-server
 if (process.env.NODE_ENV === "prod") {
-    app.use('/client', express.static(path.join(__dirname, 'client', 'build','index.html')))
+    app.use('/web', express.static(path.join(__dirname, 'client', 'build', 'index.html')))
 }
 
 //manejo de enrutamiento primario
@@ -34,8 +34,6 @@ const rootRouter = glob.sync('**/*.js', { cwd: `${__dirname}/routes` })
     .filter(item => Object.getPrototypeOf(item.instance) === express.Router) //nos fijamos que todas las rutas esten exportando una instancia de express.Router()
     .reduce((rootRouter, router) => (rootRouter.use(router.base, router.instance)), express.Router())
 app.use(rootRouter)
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -37,7 +37,8 @@ exports.updateUser = (req,res,next) => {
 
 exports.getUser = (req, res, next) => {
     const { userID } = req.body
-    User.findById()
+    //esto es para testeos
+    res.json({userName : "manuel"})
 
 }
 
