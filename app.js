@@ -28,6 +28,14 @@ if (process.env.NODE_ENV === "prod") {
     app.use('/web', express.static(path.join(__dirname, 'client', 'build', 'index.html')))
 }
 
+app.get('*', (req,res) => {
+    console.log(`La ruta: "${req.path}" no esta implementada`);
+    res.send({
+        "type": "error",
+        "message": "ruta no implementada"
+    })
+})
+
 //manejo de enrutamiento primario
 const rootRouter = glob.sync('**/*.js', { cwd: `${__dirname}/routes` })
     .map(filename => ({ instance : require(`./routes/${filename}`), base : `/api/${filename.slice(0,filename.indexOf('.') - 5)}` })) //traemos todas las rutas del directorio routes
